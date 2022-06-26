@@ -36,9 +36,31 @@ a {
   background: transparent;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+
 body {
   font-family: serif, sans-serif;
   background: var(--secondary-color);
+}
+
+.header {
+  background: var(--primary-color);
+}
+
+.main {
+  min-height: 80vh;
+  max-width: var(--max-width);
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
 }
 
 .navbar {
@@ -49,4 +71,17 @@ body {
   align-items: center;
   justify-content: space-between;
   background: var(--primary-color);
+}
+
+.btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--borderRadius);
+  background: var(--primary-color);
+  color: var(--font-color-dark);
+  width: fit-content;
+  text-align: center;
+  font-size: 1rem;
 }

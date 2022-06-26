@@ -23,6 +23,7 @@ export type Quizzes = {
 export type QuizState = {
   categories: Categories[];
   quizzes: Quizzes[];
+  quiz: Quizzes | null;
   points: number;
   result: number;
 };

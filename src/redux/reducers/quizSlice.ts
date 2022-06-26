@@ -1,21 +1,22 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   doc,
   getDoc,
   getDocs,
   getFirestore,
+  query,
   where,
   collection,
 } from "@firebase/firestore";
 import { db } from "../../firebase.config";
-import { Categories, QuizState } from "../../types/quiz.types";
+import { Categories, QuizState, Quizzes } from "../../types/quiz.types";
 
 const initialState: QuizState = {
   categories: [],
   quizzes: [],
+  quiz: null,
   points: 0,
   result: 0,
-
 };
 
 export const getCategories = createAsyncThunk(
@@ -38,17 +39,56 @@ export const getCategories = createAsyncThunk(
   }
 );
 
+export const getQuizzesByCategory = createAsyncThunk(
+  "quiz/getQuizzesByCategory",
+  async (categoryName: string | undefined, thunkAPI) => {
+    try {
+      const colRef = collection(db, "quizzes");
+      const queryRef = query(colRef, where("categoryName", "==", categoryName));
+      const snapShot = await getDocs(queryRef);
+      let quizzes = [];
+      quizzes = snapShot.docs.map((doc) => {
+        const data = doc.data();
+        data["id"] = doc.id;
+        return data as Quizzes;
+      });
+      return quizzes;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const getQuiz = createAsyncThunk(
+  "quiz/getQuiz",
+  async (id: string, thunkAPI) => {
+    try {
+      const docRef = doc(db, "quizzes", `${id}`);
+      const docSnap = await getDoc(docRef);
+      console.log(docSnap.id);
+      let data = docSnap.data() as Quizzes;
+      data["id"] = id;
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const quizSlice = createSlice({
   name: "quiz",
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(getCategories.pending, (state, action) => {
-        console.log("pending");
-      })
       .addCase(getCategories.fulfilled, (state, action) => {
         state.categories = action.payload;
+      })
+      .addCase(getQuizzesByCategory.fulfilled, (state, action) => {
+        state.quizzes = action.payload;
+      })
+      .addCase(getQuiz.fulfilled, (state, action) => {
+        state.quiz = action.payload;
       });
   },
 });

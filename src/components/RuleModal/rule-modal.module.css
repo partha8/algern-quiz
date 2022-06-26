@@ -1,0 +1,36 @@
+.rulesContainer {
+    margin: 2rem auto;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.rules {
+    border: 2px solid var(--primary-color);
+    width: 40vw;
+    padding: 1rem;
+    text-align: center;
+}
+
+.listRules {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+.listRules li {
+    list-style-type: disc;
+    margin: 0 1rem;
+}
+
+.desc {
+    font-size: 1.1rem;
+    margin: 2rem 0;
+}
+
+@media (max-width: 800px) {
+    .rules {
+        width: 80vw;
+    }
+}

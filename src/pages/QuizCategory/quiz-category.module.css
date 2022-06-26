@@ -1,0 +1,44 @@
+.cardContainer {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, 23.3rem);
+    margin: 1rem;
+    gap: 1rem;
+}
+
+.quizCard {
+    box-shadow: var(--light-shadow);
+    height: 100%;
+    border-radius: 10px;
+}
+
+.imageContainer {
+    height: 13rem;
+    cursor: pointer;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.textContainer {
+    color: var(--font-color-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    margin: 0.5rem;
+    height: 4rem;
+}
+
+.quizName {
+    width: 70%;
+    text-align: left;
+    font-size: 1.1rem;
+}
+
