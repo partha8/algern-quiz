@@ -15,8 +15,8 @@ const initialState: QuizState = {
   categories: [],
   quizzes: [],
   quiz: null,
-  points: 0,
-  result: 0,
+  score: 0,
+  result: [],
 };
 
 export const getCategories = createAsyncThunk(
@@ -65,7 +65,6 @@ export const getQuiz = createAsyncThunk(
     try {
       const docRef = doc(db, "quizzes", `${id}`);
       const docSnap = await getDoc(docRef);
-      console.log(docSnap.id);
       let data = docSnap.data() as Quizzes;
       data["id"] = id;
       return data;
@@ -78,7 +77,18 @@ export const getQuiz = createAsyncThunk(
 const quizSlice = createSlice({
   name: "quiz",
   initialState,
-  reducers: {},
+  reducers: {
+    reset(state) {
+      state.result = [];
+      state.score = 0;
+    },
+    updateResult(state, action) {
+      state.result = [...state.result, action.payload];
+    },
+    updateScore(state) {
+      state.score = state.score + 1;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(getCategories.fulfilled, (state, action) => {
@@ -92,5 +102,7 @@ const quizSlice = createSlice({
       });
   },
 });
+
+export const { reset, updateResult, updateScore } = quizSlice.actions;
 
 export default quizSlice.reducer;

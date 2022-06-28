@@ -3,7 +3,7 @@ import styles from "./home.module.css";
 import png from "../../assets/header.png";
 
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
-import { getCategories } from "../../redux/reducers/quizSlice";
+import { getCategories, reset } from "../../redux/reducers/quizSlice";
 import { Navbar } from "../../components";
 import { Link } from "react-router-dom";
 
@@ -13,6 +13,7 @@ export const Home = () => {
 
   useEffect(() => {
     dispatch(getCategories());
+    dispatch(reset());
   }, []);
 
   return (
