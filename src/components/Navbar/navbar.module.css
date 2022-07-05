@@ -1,0 +1,11 @@
+.icon {
+    vertical-align: middle;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: var(--font-color-dark);
+}
+
+.logo {
+    margin: 0;
+    color: var(--font-color-dark);
+}
