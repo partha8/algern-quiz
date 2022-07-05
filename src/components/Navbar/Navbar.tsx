@@ -10,7 +10,9 @@ export const Navbar = () => {
         <Link to="/">
           <h2 className={styles.logo}>Algern Quiz</h2>
         </Link>
-        <FaUser className={styles.icon} />
+        <Link to="/profile">
+          <FaUser className={styles.icon} />
+        </Link>
       </nav>
     </div>
   );
