@@ -17,9 +17,7 @@ export const Home = () => {
 
   return (
     <div>
-      <header className={`${styles.homepageHeader} relative`}>
-        <Navbar />
-
+      <header className="header relative">
         <section className={styles.hero}>
           <div className={styles.intro}>
             <h1 className="bold-text">Do you like trivia nights?</h1>
@@ -37,17 +35,20 @@ export const Home = () => {
       <main className={styles.categories}>
         <h3 className="text-center bold-text underline">Categories</h3>
         <section className={styles.categoriesContainer}>
-
           {categories.map((category) => {
-            const { categoryName } = category;
+            const { categoryName, id } = category;
             return (
-              <article className={styles.category}>
-                <Link to="/category">
+              <Link
+                key={id}
+                className={styles.category}
+                to={`/category/${categoryName}`}
+              >
+                <article>
                   <div className={styles.desc}>
                     <h3 className={styles.cardTitle}>{categoryName}</h3>
                   </div>
-                </Link>
-              </article>
+                </article>
+              </Link>
             );
           })}
         </section>
